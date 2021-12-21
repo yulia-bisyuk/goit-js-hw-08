@@ -6,7 +6,6 @@ const refs = {
     form: document.querySelector(".feedback-form"),
     email: document.querySelector("input"),
     textArea: document.querySelector(".feedback-form textarea"),
-    submitBtn: document.querySelector(".feedback-form button"),
 }
 
 refs.form.addEventListener('input', throttle(onFormInput, 500));
@@ -15,13 +14,13 @@ window.addEventListener('load', onPageReload)
 let formData = {};
 
 function onFormInput(evt) {
-    
+
     formData[evt.target.name] = evt.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 function onPageReload(evt) {
+
     const savedUserData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    console.log(savedUserData);
 
     if (savedUserData) {
     
@@ -29,13 +28,12 @@ function onPageReload(evt) {
         refs.email.value = savedUserData.email;
         formData.email = refs.email.value;
         formData.message = refs.textArea.value;
-    
   }
 } 
 function onFormSubmit(evt) {
+
     evt.preventDefault();
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     console.log(formData);
-
 }
