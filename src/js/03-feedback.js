@@ -12,7 +12,7 @@ const refs = {
 refs.form.addEventListener('input', throttle(onFormInput, 500));
 refs.form.addEventListener('submit', onFormSubmit)
 window.addEventListener('load', onPageReload)
-const formData = {};
+let formData = {};
 
 function onFormInput(evt) {
     
@@ -20,15 +20,16 @@ function onFormInput(evt) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
 }
 function onPageReload(evt) {
-    const savedMessage = localStorage.getItem(STORAGE_KEY);
-    // console.log(savedMessage);
+    const savedUserData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    console.log(savedUserData);
 
-    if (savedMessage) {
-        const obj = JSON.parse(savedMessage);
-       
-        refs.textArea.value = obj.message;
-        refs.email.value = obj.email;
-    // console.log(obj);
+    if (savedUserData) {
+    
+        refs.textArea.value = savedUserData.message;
+        refs.email.value = savedUserData.email;
+        formData.email = refs.email.value;
+        formData.message = refs.textArea.value;
+    
   }
 } 
 function onFormSubmit(evt) {
@@ -36,6 +37,5 @@ function onFormSubmit(evt) {
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
     console.log(formData);
-    
 
 }
