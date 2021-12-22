@@ -25,7 +25,7 @@ function createGalleryMarkup(galleryItems) {
                 </a>`
     }).join('');
 }
-var lightbox = new SimpleLightbox('.gallery a', {
+let lightbox = new SimpleLightbox('.gallery a', {
     captionPosition: 'bottom',
     captionDelay: 250,
 });
