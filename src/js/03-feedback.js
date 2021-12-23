@@ -20,28 +20,27 @@ function onFormInput(evt) {
 }
 function onPageReload(evt) {
 
-    const savedUserData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-
+const savedUserData = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (savedUserData) {
     
         refs.form.elements.message.value = savedUserData.message || null;
         refs.form.elements.email.value = savedUserData.email || null;
         
   }
+   
 } 
 function onFormSubmit(evt) {
+    evt.preventDefault();
 
     const userData = {
         email: evt.currentTarget.elements.email.value,
         message: evt.currentTarget.elements.message.value
     }
-
-    localStorage.removeItem(STORAGE_KEY);
-    evt.preventDefault();
-    evt.currentTarget.reset();
     
     if (userData.email === '' || userData.message === '') {return alert('Please fulfill all inputs')
-    } else {console.log(userData);}
-        
+    } else { console.log(userData); }
+    
+    localStorage.removeItem(STORAGE_KEY);
+    evt.currentTarget.reset();
 }
 
